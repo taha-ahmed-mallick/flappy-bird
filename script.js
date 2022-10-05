@@ -65,16 +65,14 @@ class Layer {
       }
 }
 
-let bgFunc = [];
-
 for (let i = 0; i < bg.length; i++) {
-      bgFunc.push(new Layer(bg[i].img, 1.5, bg[i].y, bg[i].nh, bg[i].nw));
+      bg[i].class = new Layer(bg[i].img, 1.5, bg[i].y, bg[i].nh, bg[i].nw);
 }
 
 function animate() {
-      for (let i = bgFunc.length - 1; i > -1; i--) {
-            bgFunc[i].update();
-            bgFunc[i].draw();
+      for (let i = bg.length - 1; i > -1; i--) {
+            bg[i].class.update();
+            bg[i].class.draw();
       }
       requestAnimationFrame(animate);
       // ctx.clearRect(0, 0, width, height);
