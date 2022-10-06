@@ -2,15 +2,15 @@ let canvas = document.getElementsByTagName("canvas")[0];
 let ctx = canvas.getContext('2d');
 let height = window.innerHeight;
 let width = window.innerWidth;
-let gameSpeed = 1;
+let gameSpeed = 5;
 let startAnimation = false;
 
 // Background
 let y = [43, 0, 0, 100, 120, 0, 130];
-let spd = [15, 0, 1, 1, 1, 1, 1, 1];
+let spd = [1, 0, 1, 1, 1, 1, 1, 1];
 let bg = [];
 
-for (let i = 0; i < 1; i++) {
+for (let i = 0; i < 7; i++) {
       bg.push({ img: new Image() });
       bg[i].img.src = `./resource/bg/0${i}.png`;
       bg[i].img.onload = () => {
@@ -64,8 +64,11 @@ class Layer {
             // if (this.x2 <= -this.width) {
             //       this.x2 = this.width + this.x - this.speed;
             // }
-            for (let i = 0; i < this.x.length; i++) this.x[i]--;
-            if (this.x[0] <= -this.w) console.log(this.x[0]);
+            for (let i = 0; i < this.x.length; i++) this.x[i] -= this.speed;
+            if (this.x[0] <= -this.w) {
+                  this.x.shift();
+                  this.x.push(this.w + this.x[this.x.length - 1]);
+            };
       }
       draw() {
             for (let i = 0; i < this.x.length; i++) {
@@ -80,11 +83,9 @@ function animate() {
             for (let i = 0; i < bg.length; i++) {
                   if (bg[i].loaded == false) {
                         startAnimation = false;
-                        console.log(false);
                         break;
                   } else if (bg[i].loaded == true) {
                         startAnimation = true;
-                        console.log(true);
                   }
             }
       }
