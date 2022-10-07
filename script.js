@@ -77,11 +77,14 @@ class Layer {
       }
 }
 
+// pipes
+let pipes = [];
+
 function animate() {
       ctx.clearRect(0, 0, width, height);
       if (startAnimation == false) {
             for (let i = 0; i < bg.length; i++) {
-                  if (bg[i].loaded == false) {
+                  if (bg[i].loaded == false || bg[i].loaded == undefined) {
                         startAnimation = false;
                         break;
                   } else if (bg[i].loaded == true) {
